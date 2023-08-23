@@ -1,15 +1,15 @@
-use crate::config::Config;
-
-mod config;
+mod config_trait_object;
 mod config_enum;
 mod config_struct_boxed_trait;
 mod config_struct;
 
 fn main() {
-    let cfg_default = Config::default();
+    // config_trait_object impl
+    println!("config_trait_object impl --------------------------------------------------");
+    let cfg_default = config_trait_object::Config::default();
     println!("default:\n{}", cfg_default.to_string().unwrap());
 
-    let mut cfg = Config::from_str().unwrap();
+    let mut cfg = config_trait_object::Config::from_str().unwrap();
     println!("cfg_str:\n{}", cfg.to_string().unwrap());
 
     println!("cfg.provider: {}", cfg.provider());
@@ -21,6 +21,7 @@ fn main() {
 
     cfg.provider_config.set(&cfg.provider(), pcfg.to_owned());
     println!("cfg_str updated:\n{}", cfg.to_string().unwrap());
+    // update not work
     println!("current provider token updated: {:?}", cfg.current_provider_config().unwrap().token());
 
     // enum impl

@@ -22,7 +22,7 @@ fn main() {
     let mut pcfg = pcfg.to_owned();
     pcfg.set_token("new_token".to_string());
 
-    cfg.provider_config.set(&cfg.provider(), pcfg.to_owned());
+    cfg.provider_config.set(&cfg.provider(), pcfg);
     println!("cfg_str updated:\n{}", cfg.to_string().unwrap());
     println!("current provider token updated: {:?}", cfg.current_provider_config().unwrap().token());
 

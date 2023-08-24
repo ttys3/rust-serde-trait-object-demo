@@ -17,11 +17,13 @@ fn main() {
     println!("current provider token: {:?}", cfg.current_provider_config().unwrap().token());
 
     let pcfg = cfg.current_provider_config().unwrap();
-    pcfg.to_owned().set_token("new_token".to_string());
+
+    // update not work because to_owned object free after used
+    let mut pcfg = pcfg.to_owned();
+    pcfg.set_token("new_token".to_string());
 
     cfg.provider_config.set(&cfg.provider(), pcfg.to_owned());
     println!("cfg_str updated:\n{}", cfg.to_string().unwrap());
-    // update not work
     println!("current provider token updated: {:?}", cfg.current_provider_config().unwrap().token());
 
     // enum impl
